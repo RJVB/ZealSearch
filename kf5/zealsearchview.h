@@ -3,10 +3,9 @@
 
 #include <QObject>
 #include <KTextEditor/MainWindow>
-#include <ktexteditor/sessionconfiginterface.h>
 #include <KXMLGUIClient>
 
-class ZealSearchView : public QObject, public KXMLGUIClient, public KTextEditor::SessionConfigInterface
+class ZealSearchView : public QObject, public KXMLGUIClient
 {
     Q_OBJECT
     public:
@@ -20,9 +19,6 @@ class ZealSearchView : public QObject, public KXMLGUIClient, public KTextEditor:
                 return NULL;
             }
         }
-        // reimplemented: read and write session config
-        void readSessionConfig (const KConfigGroup& config);
-        void writeSessionConfig (KConfigGroup& config);
     private Q_SLOTS:
         void insertZealSearch();
     private:
