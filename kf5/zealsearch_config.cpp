@@ -21,9 +21,9 @@
 #include "zealsearch_config.h"
 #include "zealsearchplugin.h"
 
-#include <QtGui/QBoxLayout>
-#include <QtGui/QLineEdit>
-#include <QtGui/QTextEdit>
+#include <QBoxLayout>
+#include <QLineEdit>
+#include <QTextEdit>
 
 #include <QMessageBox>
 #include <QLabel>
@@ -31,62 +31,64 @@
 #include <KPluginFactory>
 #include <KPluginLoader>
 #include <KConfigGroup>
- 
+#include <KSharedConfig>
+
 ZealSearch_config::ZealSearch_config(QWidget *parent, const QVariantList &args)
-  : KCModule(ZealSearchPluginFactory::componentData(), parent, args)
+  : KCModule(parent, args)
 {
-  QVBoxLayout *layout = new QVBoxLayout(this);
-  zealCmd = new QLineEdit(this);
-  zealCmd->setPlaceholderText("Zeal launch command");
-  zealCmd->setToolTip("Zeal launch command. %1 is replaced by text selected in editor.");
-  layout->addWidget(zealCmd);
-  docSets = new QTextEdit(this);
-  docSets->setToolTip("Enter new line separated docset limitations for file extensions. More explanation here: http://zealdocs.org/usage.html");
-  layout->addWidget(docSets);
-  setLayout(layout);
-  load();
-  connect(zealCmd, SIGNAL(textChanged(QString)), this, SLOT(slotChanged()));
-  connect(docSets, SIGNAL(textChanged()), this, SLOT(slotChanged()));
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    zealCmd = new QLineEdit(this);
+    zealCmd->setPlaceholderText(QStringLiteral("Zeal launch command"));
+    zealCmd->setToolTip(QStringLiteral("Zeal launch command. %1 is replaced by text selected in editor."));
+    layout->addWidget(zealCmd);
+    docSets = new QTextEdit(this);
+    docSets->setToolTip(QStringLiteral("Enter new line separated docset limitations for file extensions.\n"
+        "More explanation here: http://zealdocs.org/usage.html"));
+    layout->addWidget(docSets);
+    setLayout(layout);
+    load();
+    connect(zealCmd, SIGNAL(textChanged(QString)), this, SLOT(slotChanged()));
+    connect(docSets, SIGNAL(textChanged()), this, SLOT(slotChanged()));
 }
 
 ZealSearch_config::~ZealSearch_config(){}
 
 void ZealSearch_config::save()
 {
-  if(ZealSearchPlugin::self()){
-    ZealSearchPlugin::self()->setZealCmd(zealCmd->text());
-    ZealSearchPlugin::self()->setDocSetsStr(docSets->toPlainText());
-    ZealSearchPlugin::self()->writeConfig();
-  }else{
-    KConfigGroup cg(KGlobal::config(), "ZealSearch Plugin");
-    cg.writeEntry("zeal_command", zealCmd->text()); 
-  }
-  emit changed(false);
+    if(ZealSearchPlugin::self()){
+        ZealSearchPlugin::self()->setZealCmd(zealCmd->text());
+        ZealSearchPlugin::self()->setDocSetsStr(docSets->toPlainText());
+        ZealSearchPlugin::self()->writeConfig();
+    } else {
+        KConfigGroup cg(KSharedConfig::openConfig(), "ZealSearch Plugin");
+        cg.writeEntry("zeal_command", zealCmd->text()); 
+    }
+    emit changed(false);
 }
  
 void ZealSearch_config::load()
 {
-  if(ZealSearchPlugin::self()){
-    ZealSearchPlugin::self()->readConfig();
-    zealCmd->setText(ZealSearchPlugin::self()->getZealCmd());
-    docSets->setPlainText(ZealSearchPlugin::self()->getDocSetsStr());
-  }else{
-    KConfigGroup cg(KGlobal::config(), "ZealSearch Plugin");
-    zealCmd->setText(cg.readEntry("zeal_command", "/usr/bin/zeal --query \"%1\""));
-  }
-  emit changed(false);
+    if(ZealSearchPlugin::self()){
+        ZealSearchPlugin::self()->readConfig();
+        zealCmd->setText(ZealSearchPlugin::self()->getZealCmd());
+        docSets->setPlainText(ZealSearchPlugin::self()->getDocSetsStr());
+    }else{
+        KConfigGroup cg(KSharedConfig::openConfig(), "ZealSearch Plugin");
+        zealCmd->setText(cg.readEntry("zeal_command", "/usr/bin/zeal \"dash://%1\""));
+    }
+    emit changed(false);
 }
 
 void ZealSearch_config::defaults()
 {
-  zealCmd->setText("/usr/bin/zeal --query \"%1\"");
-  docSets->setPlainText("php:html,joomla,php,wordpress\nhtml:html\ncss:css,less\njs:javascript,jquery\n");
-  emit changed(true);
+    zealCmd->setText(QStringLiteral("/usr/bin/zeal \"dash://%1\""));
+    docSets->setPlainText(QStringLiteral("php:html,joomla,php,wordpress\nhtml:html\ncss:css,less\njs:javascript,jquery\n"));
+    emit changed(true);
 }
  
 void ZealSearch_config::slotChanged()
 {
-  emit changed(true);
+    emit changed(true);
 }
  
 #include "zealsearch_config.moc"

@@ -9,7 +9,7 @@ add_library(ktexteditor_zealsearch MODULE ${ktexteditor_zealsearch_SRCS})
 kcoreaddons_desktop_to_json(ktexteditor_zealsearch ktexteditor_zealsearch.desktop)
 # kcoreaddons_desktop_to_json(ktexteditor_zealsearch ktexteditor_zealsearch_config.desktop)
 
-target_link_libraries(ktexteditor_zealsearch KF5::TextEditor KF5::XmlGui KF5::I18n)
+target_link_libraries(ktexteditor_zealsearch Qt5::Gui KF5::TextEditor KF5::XmlGui KF5::I18n)
 
 install(TARGETS ktexteditor_zealsearch DESTINATION ${PLUGIN_INSTALL_DIR}/ktexteditor)
 

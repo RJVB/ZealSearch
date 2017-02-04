@@ -22,10 +22,13 @@
 #define ZEALSEARCH_CONFIG_H
 
 #include <KCModule>
+#include <KTextEditor/ConfigPage>
 #include <qlineedit.h>
 
 class QLineEdit;
 class QTextEdit;
+
+class ZealSearchPlugin;
 
 class ZealSearch_config
   : public KCModule
@@ -34,17 +37,38 @@ class ZealSearch_config
   public:
     explicit ZealSearch_config(QWidget *parent = 0, const QVariantList &args = QVariantList());
     virtual ~ZealSearch_config();
-    
+
     virtual void save();
     virtual void load();
     virtual void defaults();
 
   private Q_SLOTS:
     void slotChanged();
-    
+
   private:
     QLineEdit* zealCmd;
     QTextEdit* docSets;
+};
+
+class ZealSearchConfigPage : public KTextEditor::ConfigPage {
+    Q_OBJECT
+public:
+    explicit ZealSearchConfigPage(QWidget* parent = 0, ZealSearchPlugin *plugin = 0);
+    ~ZealSearchConfigPage() {}
+
+    virtual QString name() const;
+    virtual QString fullName() const;
+    virtual QIcon icon() const;
+
+    void apply();
+    void reset();
+    void defaults() {}
+
+private Q_SLOTS:
+
+private:
+    ZealSearchPlugin* m_plugin;
+    ZealSearch_config* m_config;
 };
 
 #endif // ZEALSEARCH_CONFIG_H
