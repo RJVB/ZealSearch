@@ -4,4 +4,4 @@
 *.rej
 *.orig
 build*
-destroot
+destroot*

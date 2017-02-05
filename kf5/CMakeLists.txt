@@ -1,7 +1,7 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"ktexteditor_zealsearch\")
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
 
-set(ktexteditor_zealsearch_SRCS zealsearch_config.cpp zealsearchplugin.cpp)
+set(ktexteditor_zealsearch_SRCS zealsearch_config.cpp zealsearchplugin.cpp zealsearchview.cpp)
 # resource for ui file and stuff
 qt5_add_resources(ktexteditor_zealsearch_SRCS plugin.qrc)
 

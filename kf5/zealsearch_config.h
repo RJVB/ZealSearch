@@ -1,6 +1,6 @@
 /*
- * <one line to give the program's name and a brief idea of what it does.>
  * Copyright (C) 2015  Mykola G <g@whatwhatweb.com>
+ * Copyright (C) 2017  R.J.V. Bertin <rjvbertin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,7 +54,7 @@ class ZealSearchConfigPage : public KTextEditor::ConfigPage {
     Q_OBJECT
 public:
     explicit ZealSearchConfigPage(QWidget* parent = 0, ZealSearchPlugin *plugin = 0);
-    ~ZealSearchConfigPage() {}
+    virtual ~ZealSearchConfigPage();
 
     virtual QString name() const;
     virtual QString fullName() const;
@@ -62,7 +62,7 @@ public:
 
     void apply();
     void reset();
-    void defaults() {}
+    void defaults();
 
 private Q_SLOTS:
 

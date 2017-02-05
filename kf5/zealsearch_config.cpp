@@ -1,6 +1,6 @@
 /*
- * <one line to give the program's name and a brief idea of what it does.>
  * Copyright (C) 2015  Mykola G <g@whatwhatweb.com>
+ * Copyright (C) 2017  R.J.V. Bertin <rjvbertin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,11 +27,13 @@
 
 #include <QMessageBox>
 #include <QLabel>
+#include <QIcon>
 
 #include <KPluginFactory>
 #include <KPluginLoader>
 #include <KConfigGroup>
 #include <KSharedConfig>
+#include <klocalizedstring.h>
 
 ZealSearch_config::ZealSearch_config(QWidget *parent, const QVariantList &args)
   : KCModule(parent, args)
@@ -61,7 +63,8 @@ void ZealSearch_config::save()
         ZealSearchPlugin::self()->writeConfig();
     } else {
         KConfigGroup cg(KSharedConfig::openConfig(), "ZealSearch Plugin");
-        cg.writeEntry("zeal_command", zealCmd->text()); 
+        cg.writeEntry("zeal_command", zealCmd->text());
+        cg.sync();
     }
     emit changed(false);
 }
@@ -90,6 +93,49 @@ void ZealSearch_config::slotChanged()
 {
     emit changed(true);
 }
- 
+
+ZealSearchConfigPage::ZealSearchConfigPage(QWidget* parent, ZealSearchPlugin* plugin)
+    : KTextEditor::ConfigPage(parent)
+    , m_plugin(plugin)
+{
+    m_config = new ZealSearch_config(this);
+}
+
+ZealSearchConfigPage::~ZealSearchConfigPage()
+{
+    delete m_config;
+}
+
+void ZealSearchConfigPage::apply()
+{
+    m_config->save();
+}
+
+void ZealSearchConfigPage::reset()
+{
+    m_config->load();
+}
+
+void ZealSearchConfigPage::defaults()
+{
+    m_config->defaults();
+}
+
+QString ZealSearchConfigPage::name() const
+{
+    return i18n("ZealSearch");
+}
+
+QString ZealSearchConfigPage::fullName() const
+{
+    return i18n("ZealSearch Settings");
+}
+
+QIcon ZealSearchConfigPage::icon() const
+{
+    return QIcon::fromTheme(QStringLiteral("zeal"));
+}
+
+
 #include "zealsearch_config.moc"
  
