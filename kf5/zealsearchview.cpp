@@ -54,12 +54,16 @@ ZealSearchView::ZealSearchView(KTextEditor::Plugin *plugin, KTextEditor::MainWin
     //action->setShortcut(Qt::CTRL + Qt::Key_XYZ);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(insertZealSearch()));
 
-    m_mWin->guiFactory()->addClient(this);
+    if (m_mWin && m_mWin->guiFactory()) {
+        m_mWin->guiFactory()->addClient(this);
+    }
 }
 
 ZealSearchView::~ZealSearchView()
 {
-    m_mWin->guiFactory()->removeClient(this);
+    if (m_mWin && m_mWin->guiFactory()) {
+        m_mWin->guiFactory()->removeClient(this);
+    }
 }
 
 void ZealSearchView::insertZealSearch()
