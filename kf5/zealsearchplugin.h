@@ -47,10 +47,10 @@ class ZealSearchPlugin
 //     void addView (KTextEditor::View *view);
 //     void removeView (KTextEditor::View *view);
  
-    QObject *createView(KTextEditor::MainWindow *mainWindow);
+    QObject *createView(KTextEditor::MainWindow *mainWindow) override;
 
-    int configPages() const { return 1; };
-    KTextEditor::ConfigPage *configPage(int number = 0, QWidget *parent = 0);
+    int configPages() const override { return 1; };
+    KTextEditor::ConfigPage *configPage(int number = 0, QWidget *parent = 0) override;
     void readConfig();
     void writeConfig();
  

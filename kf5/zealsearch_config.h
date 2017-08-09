@@ -38,9 +38,9 @@ class ZealSearch_config
     explicit ZealSearch_config(QWidget *parent = 0, const QVariantList &args = QVariantList());
     virtual ~ZealSearch_config();
 
-    virtual void save();
-    virtual void load();
-    virtual void defaults();
+    virtual void save() override;
+    virtual void load() override;
+    virtual void defaults() override;
 
   private Q_SLOTS:
     void slotChanged();
@@ -56,13 +56,13 @@ public:
     explicit ZealSearchConfigPage(QWidget* parent = 0, ZealSearchPlugin *plugin = 0);
     virtual ~ZealSearchConfigPage();
 
-    virtual QString name() const;
-    virtual QString fullName() const;
-    virtual QIcon icon() const;
+    virtual QString name() const override;
+    virtual QString fullName() const override;
+    virtual QIcon icon() const override;
 
-    void apply();
-    void reset();
-    void defaults();
+    void apply() override;
+    void reset() override;
+    void defaults() override;
 
 private Q_SLOTS:
 
