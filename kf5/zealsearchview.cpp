@@ -139,7 +139,6 @@ QString ZealSearchView::currentWord() const
 
 void ZealSearchView::insertZealSearch()
 {
-    qWarning() << Q_FUNC_INFO << sender();
     QString searchTerm = currentWord();
 
     if (!searchTerm.isEmpty()) {
