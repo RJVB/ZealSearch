@@ -1,0 +1,25 @@
+{
+    "GenericName": "ZealSearch",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "rjvbertin@gmail.com, misty.g3ar@gmail.com",
+                "Name": "R.J.V. Bertin, Mykola G"
+            }
+        ],
+        "Description": "Plugin for searching selected text in zeal",
+        "Icon": "zeal",
+        "Id": "ktexteditorzealsearch",
+        "License": "GPL",
+        "Name": "ZealSearch",
+        "ServiceTypes": [
+            "KTextEditor/Plugin",
+            "KDevelop/Plugin"
+        ],
+        "Category": "Documentation",
+        "Version": "0.1",
+        "Website": "https://github.com/RJVB/zealsearch"
+    },
+    "X-KDE-PluginKeyword": "ktexteditor_zealsearch",
+    "X-KDE-Version": "5.0"
+}

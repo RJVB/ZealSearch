@@ -12,7 +12,9 @@ ecm_qt_declare_logging_category(ktexteditor_zealsearch_SRCS
 )
 
 add_library(ktexteditor_zealsearch MODULE ${ktexteditor_zealsearch_SRCS})
-kcoreaddons_desktop_to_json(ktexteditor_zealsearch ktexteditor_zealsearch.desktop)
+
+get_filename_component(json ktexteditor_zealsearch.json REALPATH)
+set_property(TARGET ktexteditor_zealsearch APPEND PROPERTY AUTOGEN_TARGET_DEPENDS ${json})
 
 target_link_libraries(ktexteditor_zealsearch Qt5::Gui KF5::TextEditor KF5::XmlGui KF5::I18n)
 
