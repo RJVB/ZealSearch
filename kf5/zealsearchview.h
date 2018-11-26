@@ -47,8 +47,9 @@ class ZealSearchView : public QObject, public KXMLGUIClient
     private Q_SLOTS:
         void insertZealSearch();
         void aboutToShow();
+        void configure();
     private:
-        KTextEditor::MainWindow* m_mWin;
+        QPointer<KTextEditor::MainWindow> m_mWin;
         KTextEditor::Plugin* m_plugin;
         const QString& m_zealCmd;
         const QMap<QString, QString>& m_docSets;

@@ -39,26 +39,32 @@
 #include <QMapIterator>
 #include <QStringList>
 #include <QMenu>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QBoxLayout>
 
 ZealSearchView::ZealSearchView(KTextEditor::Plugin *plugin, KTextEditor::MainWindow *mainWin, const QString& zealCmd, const QMap<QString, QString>& docSets)
-: QObject(mainWin)
-, m_mWin(mainWin)
-, m_plugin(plugin)
-, m_zealCmd(zealCmd)
-, m_docSets(docSets)
+    : QObject(mainWin)
+    , m_mWin(mainWin)
+    , m_plugin(plugin)
+    , m_zealCmd(zealCmd)
+    , m_docSets(docSets)
 {
     KXMLGUIClient::setComponentName(QLatin1String("ktexteditor_zealsearch"), i18n("Zeal Search"));
     setXMLFile(QLatin1String("zealsearchui.rc"));
 
     KConfigGroup cg(KSharedConfig::openConfig(), "ZealSearch Plugin");
 
-    QAction *action = actionCollection()->addAction(QLatin1String("tools_zealsearch"));
+    QAction *action = actionCollection()->addAction(QLatin1String("zeal_lookup"));
     action->setText(i18n("Lookup"));
     //action->setShortcut(Qt::CTRL + Qt::Key_XYZ);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(insertZealSearch()));
+    action = actionCollection()->addAction(QLatin1String("zeal_prefs"));
+    action->setText(i18n("Configure ..."));
+    connect(action, &QAction::triggered, this, &ZealSearchView::configure);
 
     m_ctxMenu = new KActionMenu(i18n("Zeal"), this);
-    actionCollection()->addAction(QLatin1String("popup_zeal"), m_ctxMenu);
+    actionCollection()->addAction(QLatin1String("zeal_popup"), m_ctxMenu);
     m_lookup = m_ctxMenu->menu()->addAction(i18n("Lookup: %1",QString()), this, SLOT(insertZealSearch()));
     connect(m_ctxMenu->menu(), &QMenu::aboutToShow, this, &ZealSearchView::aboutToShow);
 
@@ -155,6 +161,27 @@ void ZealSearchView::aboutToShow()
     }
 
     m_lookup->setText(i18n("Lookup: %1", KStringHandler::csqueeze(currWord, 30)));
+}
+
+void ZealSearchView::configure()
+{
+    if (!m_plugin || !m_mWin) {
+        return;
+    }
+    ZealSearchPlugin *p = dynamic_cast<ZealSearchPlugin*>(m_plugin);
+    QDialog *confWin = new QDialog(m_mWin->window());
+    auto confPage = p->configPage(0, confWin);
+    auto controls = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, nullptr);
+    connect(confWin, &QDialog::accepted, confPage, &KTextEditor::ConfigPage::apply);
+    connect(controls, &QDialogButtonBox::accepted, confWin, &QDialog::accept);
+    connect(controls, &QDialogButtonBox::rejected, confWin, &QDialog::reject);
+    auto layout = new QVBoxLayout;
+    layout->addWidget(confPage);
+    layout->addWidget(controls);
+    confWin->setLayout(layout);
+    confWin->show();
+    confWin->exec();
+    confWin->deleteLater(), confPage->deleteLater(), controls->deleteLater(), layout->deleteLater();
 }
 
 // #include "zealsearchview.moc"

@@ -35,6 +35,8 @@
 #include <KSharedConfig>
 #include <klocalizedstring.h>
 
+#include <QDebug>
+
 ZealSearch_config::ZealSearch_config(QWidget *parent, const QVariantList &args)
   : KCModule(parent, args)
 {
@@ -99,6 +101,8 @@ ZealSearchConfigPage::ZealSearchConfigPage(QWidget* parent, ZealSearchPlugin* pl
     , m_plugin(plugin)
 {
     m_config = new ZealSearch_config(this);
+    // we get our layout from the KCM
+    setLayout(m_config->layout());
 }
 
 ZealSearchConfigPage::~ZealSearchConfigPage()

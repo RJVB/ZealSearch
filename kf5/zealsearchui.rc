@@ -7,12 +7,14 @@
         <separator group="tools_operations" />
         <Menu name="zealsearch" group="tools_operations">
             <Text>Zeal</Text>
-            <Action name="tools_zealsearch"/>
+            <Action name="zeal_lookup"/>
+            <Separator/>
+            <Action name="zeal_prefs"/>
         </Menu>
      </Menu>
     </MenuBar>
   <Menu name="ktexteditor_popup" noMerge="1">
-    <Action name="popup_zeal"/>
+    <Action name="zeal_popup"/>
   </Menu>
 </gui>
 <!-- kate: space-indent on; indent-width 4; replace-tabs on; -->

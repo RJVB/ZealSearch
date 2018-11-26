@@ -114,7 +114,7 @@ void ZealSearchPlugin::writeConfig()
 KTextEditor::ConfigPage *ZealSearchPlugin::configPage(int number, QWidget *parent)
 {
     if (number != 0) {
-        return Q_NULLPTR;
+        return nullptr;
     } else {
         return new ZealSearchConfigPage(parent, this);
     }

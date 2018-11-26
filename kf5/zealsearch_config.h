@@ -50,7 +50,8 @@ class ZealSearch_config
     QTextEdit* docSets;
 };
 
-class ZealSearchConfigPage : public KTextEditor::ConfigPage {
+class ZealSearchConfigPage : public KTextEditor::ConfigPage
+{
     Q_OBJECT
 public:
     explicit ZealSearchConfigPage(QWidget* parent = 0, ZealSearchPlugin *plugin = 0);
