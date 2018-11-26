@@ -7,7 +7,7 @@
         <separator group="tools_operations" />
         <Menu name="zealsearch" group="tools_operations">
             <Text>Zeal</Text>
-            <Action name="tools_zealsearch""/>
+            <Action name="tools_zealsearch"/>
         </Menu>
      </Menu>
     </MenuBar>
