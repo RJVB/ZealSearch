@@ -7,7 +7,7 @@
                 "Name": "R.J.V. Bertin, Mykola G"
             }
         ],
-        "Description": "Plugin for searching selected text in zeal",
+        "Description": "Plugin for searching selected text in zeal\nhttps://zealdocs.org",
         "ExtraInformation": "KF5 version by RJVB.\nPlease report issues via github:RJVB/zealsearch",
         "Icon": "zeal",
         "Id": "ktexteditorzealsearch",
