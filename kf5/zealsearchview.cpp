@@ -53,7 +53,7 @@ ZealSearchView::ZealSearchView(KTextEditor::Plugin *plugin, KTextEditor::MainWin
     KConfigGroup cg(KSharedConfig::openConfig(), "ZealSearch Plugin");
 
     QAction *action = actionCollection()->addAction(QLatin1String("tools_zealsearch"));
-    action->setText(i18n("ZealSearch"));
+    action->setText(i18n("Lookup"));
     //action->setShortcut(Qt::CTRL + Qt::Key_XYZ);
     connect(action, SIGNAL(triggered(bool)), this, SLOT(insertZealSearch()));
 
