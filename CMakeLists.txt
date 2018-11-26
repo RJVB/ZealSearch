@@ -30,6 +30,7 @@ else()
     include(KDECompilerSettings NO_POLICY_SCOPE)
     include(KDECMakeSettings)
 
+    include(ECMQtDeclareLoggingCategory)
     include(ECMAddTests)
 
     set(KF5_DEP_VERSION "5.29.0")

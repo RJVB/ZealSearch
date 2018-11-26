@@ -48,6 +48,8 @@ ZealSearchPlugin::ZealSearchPlugin(QObject *parent, const QVariantList &args)
 : KTextEditor::Plugin(parent)
 {
     Q_UNUSED(args);
+    // parent->metaObject()->className() == "KatePluginManager" in kate
+    // parent->metaObject()->className() == "KDevelop::Core" in KDevelop
     plugin = this;
     readConfig();
 }

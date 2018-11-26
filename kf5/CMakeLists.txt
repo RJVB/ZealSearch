@@ -5,6 +5,12 @@ set(ktexteditor_zealsearch_SRCS zealsearch_config.cpp zealsearchplugin.cpp zeals
 # resource for ui file and stuff
 qt5_add_resources(ktexteditor_zealsearch_SRCS plugin.qrc)
 
+ecm_qt_declare_logging_category(ktexteditor_zealsearch_SRCS
+    HEADER zealsearch_debug.h
+    IDENTIFIER KTEZEAL
+    CATEGORY_NAME "katezealsearchplugin"
+)
+
 add_library(ktexteditor_zealsearch MODULE ${ktexteditor_zealsearch_SRCS})
 kcoreaddons_desktop_to_json(ktexteditor_zealsearch ktexteditor_zealsearch.desktop)
 

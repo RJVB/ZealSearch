@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE kpartgui>
-<gui name="ktexteditor_zealsearch" library="ktexteditor_zealsearch" version="4" translationDomain="ktexteditor_zealsearch">
+<gui name="ktexteditor_zealsearch" library="ktexteditor_zealsearch" version="5" translationDomain="ktexteditor_zealsearch">
     <MenuBar>
      <Menu name="tools">
         <Text>&amp;Tools</Text>
@@ -8,5 +8,8 @@
         <Action name="tools_zealsearch" group="tools_operations"/>
      </Menu>
     </MenuBar>
+  <Menu name="ktexteditor_popup" noMerge="1">
+    <Action name="popup_zeal"/>
+  </Menu>
 </gui>
 <!-- kate: space-indent on; indent-width 4; replace-tabs on; -->

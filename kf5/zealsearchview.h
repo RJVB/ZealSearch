@@ -22,8 +22,11 @@
 #define ZEALSEARCHVIEW_H
 
 #include <QObject>
+#include <QPointer>
+
 #include <KTextEditor/MainWindow>
 #include <KXMLGUIClient>
+#include <KActionMenu>
 
 class ZealSearchView : public QObject, public KXMLGUIClient
 {
@@ -31,21 +34,26 @@ class ZealSearchView : public QObject, public KXMLGUIClient
     public:
         explicit ZealSearchView(KTextEditor::Plugin *plugin, KTextEditor::MainWindow *mainWin, const QString& zealCmd, const QMap<QString, QString>& docSets);
         ~ZealSearchView();
-        KTextEditor::View *activeView()
+        KTextEditor::View *activeView() const
         {
             if (m_mWin) {
                 return m_mWin->activeView();
             } else {
-                return NULL;
+                return nullptr;
             }
         }
+        QString currentWord() const;
+
     private Q_SLOTS:
         void insertZealSearch();
+        void aboutToShow();
     private:
         KTextEditor::MainWindow* m_mWin;
         KTextEditor::Plugin* m_plugin;
         const QString& m_zealCmd;
         const QMap<QString, QString>& m_docSets;
+        QPointer<KActionMenu> m_ctxMenu;
+        QAction* m_lookup;
 };
 
 #endif

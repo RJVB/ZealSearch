@@ -137,5 +137,5 @@ QIcon ZealSearchConfigPage::icon() const
 }
 
 
-#include "zealsearch_config.moc"
+// #include "zealsearch_config.moc"
  
