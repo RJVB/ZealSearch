@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(ktexteditor_zealsearch)
 
-option(USE_KDE4 "legacy build for KDE4" ON)
+option(USE_KDE4 "legacy build for KDE4" OFF)
 
 include(FeatureSummary)
 
