@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2015  Mykola G <g@whatwhatweb.com>
- * Copyright (C) 2017  R.J.V. Bertin <rjvbertin@gmail.com>
+ * Copyright (C) 2017-18  R.J.V. Bertin <rjvbertin@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
