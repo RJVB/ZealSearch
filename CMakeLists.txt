@@ -27,7 +27,7 @@ else()
     find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core Gui Widgets)
 
     include(KDEInstallDirs)
-    include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
+    include(KDECompilerSettings NO_POLICY_SCOPE)
     include(KDECMakeSettings)
 
     include(ECMAddTests)
