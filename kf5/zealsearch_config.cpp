@@ -79,14 +79,25 @@ void ZealSearch_config::load()
         docSets->setPlainText(ZealSearchPlugin::self()->getDocSetsStr());
     }else{
         KConfigGroup cg(KSharedConfig::openConfig(), "ZealSearch Plugin");
+#ifdef Q_OS_MACOS
+        zealCmd->setText(QStringLiteral("open -a zeal.app -W -n --args \"dash://%1\""));
+#else
         zealCmd->setText(cg.readEntry("zeal_command", "/usr/bin/zeal \"dash://%1\""));
+#endif
     }
     emit changed(false);
 }
 
 void ZealSearch_config::defaults()
 {
+#ifdef Q_OS_MACOS
+    // go through LaunchServices. Use -W -n (wait and always start a new instance) to
+    // simulate regular system(2) or fork()+exec() behaviour. Without -n LaunchServices
+    // refuses to send the argument if the application is already running.
+    zealCmd->setText(QStringLiteral("open -a zeal.app -W -n --args \"dash://%1\""));
+#else
     zealCmd->setText(QStringLiteral("/usr/bin/zeal \"dash://%1\""));
+#endif
     docSets->setPlainText(QStringLiteral("php:html,joomla,php,wordpress\nhtml:html\ncss:css,less\njs:javascript,jquery\n"));
     emit changed(true);
 }

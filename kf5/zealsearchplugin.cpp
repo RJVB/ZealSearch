@@ -95,6 +95,9 @@ void ZealSearchPlugin::readConfig()
 {
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("ZealSearch Plugin"));
 #ifdef Q_OS_MACOS
+    // go through LaunchServices. Use -W -n (wait and always start a new instance) to
+    // simulate regular system(2) or fork()+exec() behaviour. Without -n LaunchServices
+    // refuses to send the argument if the application is already running.
     zealCmd = cg.readEntry("zeal_command", "open -a zeal.app -W -n --args \"dash://%1\"");
 #else
     zealCmd = cg.readEntry("zeal_command", "/usr/bin/zeal \"dash://%1\"");
