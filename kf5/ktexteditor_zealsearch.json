@@ -8,6 +8,7 @@
             }
         ],
         "Description": "Plugin for searching selected text in zeal",
+        "ExtraInformation": "KF5 version by RJVB.\nPlease report issues via github:RJVB/zealsearch",
         "Icon": "zeal",
         "Id": "ktexteditorzealsearch",
         "License": "GPL",
