@@ -94,9 +94,14 @@ QString ZealSearchPlugin::getDocSetsStr()
 void ZealSearchPlugin::readConfig()
 {
     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("ZealSearch Plugin"));
+#ifdef Q_OS_MACOS
+    zealCmd = cg.readEntry("zeal_command", "open -a zeal.app -W -n --args \"dash://%1\"");
+#else
     zealCmd = cg.readEntry("zeal_command", "/usr/bin/zeal \"dash://%1\"");
-    QString docSets_str = cg.readEntry("zeal_docsets", "php:html,joomla,php,wordpress\nhtml:html\ncss:css,less\njs:javascript,jquery\n");
-setDocSetsStr(docSets_str);
+#endif
+    QString docSets_str = cg.readEntry("zeal_docsets",
+        "php:html,joomla,php,wordpress\nhtml:html\ncss:css,less\njs:javascript,jquery\n");
+    setDocSetsStr(docSets_str);
 }
 
 void ZealSearchPlugin::writeConfig()
