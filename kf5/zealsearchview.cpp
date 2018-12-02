@@ -137,9 +137,6 @@ QString ZealSearchView::currentWord() const
         }
     }
 
-    if(!m_docSets[docExt].isEmpty()) {
-        searchTerm = m_docSets[docExt] + QStringLiteral(":") + searchTerm;
-    }
     return searchTerm;
 }
 
@@ -157,9 +154,11 @@ void ZealSearchView::aboutToShow()
 {
     QString currWord = currentWord();
     if (currWord.isEmpty()) {
+        m_lookup->setVisible(false);
         return;
     }
 
+    m_lookup->setVisible(true);
     m_lookup->setText(i18n("Lookup: %1", KStringHandler::csqueeze(currWord, 30)));
 }
 
