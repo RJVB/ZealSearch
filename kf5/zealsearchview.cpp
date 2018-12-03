@@ -154,11 +154,12 @@ void ZealSearchView::aboutToShow()
 {
     QString currWord = currentWord();
     if (currWord.isEmpty()) {
-        m_lookup->setVisible(false);
+        m_lookup->setText(i18n("Lookup"));
+        m_lookup->setEnabled(false);
         return;
     }
 
-    m_lookup->setVisible(true);
+    m_lookup->setEnabled(true);
     m_lookup->setText(i18n("Lookup: %1", KStringHandler::csqueeze(currWord, 30)));
 }
 
