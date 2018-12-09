@@ -170,6 +170,7 @@ void ZealSearchView::configure()
     }
     ZealSearchPlugin *p = dynamic_cast<ZealSearchPlugin*>(m_plugin);
     QDialog *confWin = new QDialog(m_mWin->window());
+    confWin->setAttribute(Qt::WA_DeleteOnClose);
     auto confPage = p->configPage(0, confWin);
     auto controls = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Cancel, Qt::Horizontal, nullptr);
     connect(confWin, &QDialog::accepted, confPage, &KTextEditor::ConfigPage::apply);
@@ -181,7 +182,6 @@ void ZealSearchView::configure()
     confWin->setLayout(layout);
     confWin->show();
     confWin->exec();
-    confWin->deleteLater(), confPage->deleteLater(), controls->deleteLater(), layout->deleteLater();
 }
 
 // #include "zealsearchview.moc"
