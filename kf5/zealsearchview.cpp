@@ -180,6 +180,8 @@ void ZealSearchView::configure()
     layout->addWidget(confPage);
     layout->addWidget(controls);
     confWin->setLayout(layout);
+    confWin->setWindowTitle(i18nc("@title title of the dialog", "Configure ZealSearch Plugin"));
+    confWin->setWindowIcon(confPage->icon());
     confWin->show();
     confWin->exec();
 }
